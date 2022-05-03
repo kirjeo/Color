@@ -1,0 +1,33 @@
+#! /bin/sh
+
+x=0
+while [ "$x" != 1 ]
+do
+	echo "Give me a primary color (red, yellow, blue)"
+	read color1
+	a=$(echo "$color1" | tr '[:upper:]' '[:lower:]')
+	echo "Give me a second primary color (red, yellow, blue)"
+	read color2
+	b=$(echo "$color2" | tr '[:upper:]' '[:lower:]')
+	if [ "$a" = "red" ] || [ "$a" = "yellow" ] || [ "$a" = "blue"]; then
+		if [ "$b" = "red" ] || [ "$b" = "yellow" ] || [ "$b" = "blue"]; then x=1
+		else echo "Your second color was not a primary color (red, yellow, blue)"
+		fi
+	else echo "Your first color was not a primary color (red, yellow, blue)"
+	fi
+done
+
+case "$a+$b" in
+	"red"+"red" )
+		color3=red;;
+	"red"+"yellow" | "yellow"+"red" )
+		color3=orange;;
+	"red"+"blue" | "blue"+"red" )
+		color3=purple;;
+	"yellow"+"yellow" )
+		color3=yellow;;
+	"yellow"+"blue" | "blue"+"yellow" )
+		color3=green;;
+	"blue"+"blue" )
+		color3=blue;;
+esac
